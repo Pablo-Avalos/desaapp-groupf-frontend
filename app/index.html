@@ -13,6 +13,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/font-awesome.css">
     <!-- endbuild -->
   </head>
   <body ng-app="desaappGroupfFrontendApp">
@@ -51,7 +52,10 @@
     <div class="container">
     <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
     </div>
-
+    
+    <div class="container">
+    </div>
+   
     <div class="footer">
       <div class="container">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
@@ -65,7 +69,6 @@
        (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
        r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
        }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
