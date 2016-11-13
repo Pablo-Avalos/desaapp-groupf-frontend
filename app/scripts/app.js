@@ -12,5 +12,3 @@ angular
   .module('desaappGroupfFrontendApp', [
     'ngResource'
   ]);
-  
-  
