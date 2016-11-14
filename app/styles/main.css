@@ -99,3 +99,9 @@ body {
 #tab-friends{
   background-color:#F5D0A9;
 }
+
+.hr{
+       border-top: 1px dotted #000000 !important;
+       margin-bottom:5px !important; 
+       margin-top:5px !important;
+   }

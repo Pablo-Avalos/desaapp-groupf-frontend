@@ -18,12 +18,13 @@ $scope.myPerfil = {};
 //$scope.genreMusical = "JAJAJ";    
     $http({
         method : "GET",
-        url : urlBase + "profile/getprofile/2",
+        url : urlBase + "profile/getprofile/1",
         headers: {'Content-Type': 'application/json'}
     }).then(function mySucces(response) {
         $scope.myPerfil.idProfile =  response.data.idProfile;
         $scope.myPerfil.musicalGeneres = response.data.musicalGeneres;
         $scope.myPerfil.foodTastes = response.data.foodTastes;
+        $scope.myPerfil.moviegeneres = response.data.moviegeneres;
         $scope.myPerfil.otherLikes = response.data.otherLikes;
         $scope.myPerfil.amountMax = response.data.amountMax;
         $scope.myPerfil.conveyance = response.data.conveyance;
@@ -103,7 +104,7 @@ app.controller('optionMusicalGenre', function($scope,$http) {
 //$scope.genreMusical = "JAJAJ";    
     $http({
         method : "GET",
-        url : urlBase + "profile/getprofile/2",
+        url : urlBase + "profile/getprofile/1",
         headers: {'Content-Type': 'application/json'}
     }).then(function mySucces(response) {
         $scope.availableOptions= response.data.musicalGeneres;
@@ -151,7 +152,7 @@ app.controller('optionFoodGenre', function($scope,$http) {
 //$scope.genreMusical = "JAJAJ";    
     $http({
         method : "GET",
-        url : urlBase + "profile/getprofile/2",
+        url : urlBase + "profile/getprofile/1",
         headers: {'Content-Type': 'application/json'}
     }).then(function mySucces(response) {
         $scope.availableFoodOptions= response.data.foodTastes;
@@ -174,7 +175,7 @@ app.controller('optionFoodGenre', function($scope,$http) {
         headers: {'Content-Type': 'application/json' , 'accept': 'application/json'},
         data : $scope.myPerfil,
     }).then(function mySucces(response) {
-        console.log("valor de data.model: " + $scope.data.model);
+        //console.log("valor de data.model: " + $scope.data.model);
         $scope.myPerfil.idProfile =  response.data.idProfile;
         $scope.myPerfil.nik = response.data.nik;
         $scope.myPerfil.conveyance = response.data.conveyance;
@@ -198,10 +199,10 @@ app.controller('optionMovieGenre', function($scope,$http) {
 //$scope.genreMusical = "JAJAJ";    
     $http({
         method : "GET",
-        url : urlBase + "profile/getprofile/2",
+        url : urlBase + "profile/getprofile/1",
         headers: {'Content-Type': 'application/json'}
     }).then(function mySucces(response) {
-        $scope.availableMovieOptions= response.data.movieGenre;
+        $scope.availableMovieOptions= response.data.moviegeneres;
    }, function myError(response) {
             console.log(response);
 
@@ -213,15 +214,15 @@ app.controller('optionMovieGenre', function($scope,$http) {
         var nuevo = {};
         nuevo.id= null;
         nuevo.name = $scope.newMovieGenre;
-        $scope.myPerfil.movieTastes.push(nuevo);
-        console.log("MYPREFIL " + $scope.myPerfil.movieGenre);
+        $scope.myPerfil.moviegeneres.push(nuevo);
+        console.log("MYPREFIL " + $scope.myPerfil.moviegeneres);
         $http({
         method : 'POST', 
         url : urlBase + 'profile/updateprofile',
         headers: {'Content-Type': 'application/json' , 'accept': 'application/json'},
         data : $scope.myPerfil,
     }).then(function mySucces(response) {
-        console.log("valor de data.model: " + $scope.data.model);
+        console.log("valor de data.model: " + $scope.newMovieGenre);
         $scope.myPerfil.idProfile =  response.data.idProfile;
         $scope.myPerfil.nik = response.data.nik;
         $scope.myPerfil.conveyance = response.data.conveyance;
@@ -232,8 +233,56 @@ app.controller('optionMovieGenre', function($scope,$http) {
 
         $scope.data.model = "vacio";
        
+    });
+    };
+
+});
+
+
+// other controller
+    
+    app.controller('optionOther', function($scope,$http) {  
+    $http({
+        method : "GET",
+        url : urlBase + "profile/getprofile/1",
+        headers: {'Content-Type': 'application/json'}
+    }).then(function mySucces(response) {
+        $scope.availableOtherOptions= response.data.otherLikes;
+   }, function myError(response) {
+            console.log(response);
+
+        $scope.eltema = "error";
+    });
+    
+    
+       $scope.addOtherGeneres = function(){
+        var nuevo = {};
+        nuevo.id= null;
+        nuevo.name = $scope.newOtherGenre;
+        $scope.myPerfil.otherLikes.push(nuevo);
+        console.log("MYPREFIL " + $scope.myPerfil.otherLikes);
+        $http({
+        method : 'POST', 
+        url : urlBase + 'profile/updateprofile',
+        headers: {'Content-Type': 'application/json' , 'accept': 'application/json'},
+        data : $scope.myPerfil,
+    }).then(function mySucces(response) {
+        console.log("MYPREFIL " + $scope.myPerfil);
+        $scope.myPerfil.idProfile =  response.data.idProfile;
+        $scope.myPerfil.nik = response.data.nik;
+        $scope.myPerfil.conveyance = response.data.conveyance;
+        console.log(response);
+        console.log("id" + $scope.myPerfil.idProfile + " nik: " + $scope.myPerfil.nik );
+   }, function myError(response) {
+            console.log(response);
+
+        $scope.myPerfil = "vacio";
+       
        
     });
+        
+   
+    $scope.hola = $scope.musicalImput;
     };
 
 });

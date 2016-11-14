@@ -19,34 +19,33 @@
                  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- endbuild -->
     </head>
-    <body ng-app="desaappGroupfFrontendApp">
-  
-  	<div STYLE="width: 100%; background-color: #D8D8D8"
+<body ng-app="desaappGroupfFrontendApp">
+  <div STYLE="width: 100%; background-color: #D8D8D8"
 		class="wide nav header"><h3 align="middle"> Where we go ?</h3></div>
-        <div class="row">
-            <div class="col-xs-3" >
-                <div>
-                    <ul>
-                        <img src="http://hombre.starmedia.com/imagenes/2012/12/facebook350.jpg" style="text-align: top;width:100px;height:100px;">
-                    </ul>
-                </div>
-                <div>
-                    <ul>
-                        <li><a href="#userName-tab" data-toggle="tab">User name</a></li>
-                        <li><a href="#editProfiler-tab" data-toggle="tab">Edit Profile</a></li>
-                        <li><a href="#friends-tab" data-toggle="tab">Friends</a>
-                            <ul class="nav nav-tabs nav-stacked">
-                                <li>amigo1</li>
-                                <li>amigo2</li>
-                                <li>amigo3</li>
-                                <li>amigo4</li>
-                                <li>amigo5</li>
-                                <li>amigo6</li>
-                            </ul>
-                        </li>
-                        <li><a href="#createEvet-tab" data-toggle="tab">Create Events</a></li>
-                    </ul>
-                </div>
+  <div class="row">
+      <div class="col-xs-3" >
+      <div>
+        <ul>
+            <img src="http://hombre.starmedia.com/imagenes/2012/12/facebook350.jpg" style="text-align: top;width:100px;height:100px;">
+        </ul>
+      </div>
+      <div>
+        <ul>
+            <li><a href="#userName-tab" data-toggle="tab">User name</a></li>
+            <li><a href="#editProfiler-tab" data-toggle="tab">Edit Profile</a></li>
+            <li><a href="#friends-tab" data-toggle="tab">Friends</a>
+                <ul class="nav nav-tabs nav-stacked">
+                    <li>amigo1</li>
+                    <li>amigo2</li>
+                    <li>amigo3</li>
+                    <li>amigo4</li>
+                    <li>amigo5</li>
+                    <li>amigo6</li>
+                </ul>
+            </li>
+            <li><a href="#createEvet-tab" data-toggle="tab">Create Events</a></li>
+            </ul>
+            </div>
             </div>	         
             <div class="col-xs-9">
                 <div>
@@ -132,27 +131,27 @@
                         <div role="tabpanel" class="tab-pane" id="profile"><h1>Your Profile</h1>
                             <div ng-controller="ctrlProfile">
                                 <h3>According to your tastes and preferences outputs</h3>
+                                <hr>
                                 <div class="form-group">
                                     <label for="usr">Maximum amount for economic:</label>
                                     <label>{{myPerfil.amountMax}}</label>
                                 </div>
                                 <div>
                                     <label>Nik: {{myPerfil.nik}}</label>
-                                    <button>Editar</button>
+                                    <button type="button" class="btn btn-primary btn-sm" ng-click=""><i class="glyphicon glyphicon-pencil"></i></button>
                                 </div>
+                                <hr>
                                 <!-- MUSICAL GENRE -->
                                     <div>                                     
                                         <div ng-controller="optionMusicalGenre">
-                                            <!--<form name="myForm"> -->
+                                            
                                                 <label for="repeatSelect">Add favorite genre: </label>
-                                                <br>
-                                                <select name="repeatSelect" id="repeatSelect" ng-model="newMusicalGenre">
+                                            <form name="myForm">
+                                            <select name="repeatSelect" id="repeatSelect" ng-model="newMusicalGenre">
                                                     <option ng-repeat="option in availableOptions" value="{{option.name}}">{{option.name}}</option>
                                                 </select>
-                                                <button type="button" class="btn btn-primary btn-sm" ng-click="addMusicalGeneres2()"> Add</button>
-                                             <!--</form>-->
-                                            <hr>
-                                        
+                                                <button type="button" class="btn btn-primary btn-sm" ng-click="addMusicalGeneres2()"><i class="glyphicon glyphicon-plus"></i></button>
+                                            </form>                                           
                                         <div>
                                             <ul class="list-group">
                                                 <div class="container">
@@ -163,12 +162,15 @@
                                             </ul>
                                         </div>
                                         <!-- add musical generes -->
+                                        <!--    
                                         <div>
                                             <label>Add Musical Generes: <input type="text" ng-model="musicalImput" ng-bind="genreMusical"></label> <span ></span>
-                                            <button type="button" class="btn btn-primary btn-sm" ng-click="addMusicalGeneres()"> Add</button>
+                                            <button type="button" class="btn btn-primary btn-sm" ng-click="addMusicalGeneres()"> <i class="glyphicon glyphicon-plus"></i></button>
                                         </div>
+                                         -->
                                      </div>
                                     </div>
+                                <hr>
                                     <!-- FOOD GENRE -->
                                     <div>                                     
                                         <div ng-controller="optionFoodGenre">
@@ -178,12 +180,11 @@
                                                 <select name="repeatSelect" id="repeatSelect" ng-model="newFoodGenre">
                                                     <option ng-repeat="option in availableFoodOptions" value="{{option.name}}">{{option.name}}</option>
                                                 </select>
-                                                <button type="button" class="btn btn-primary btn-sm" ng-click="addFoodGeneres2()"> Add</button>
+                                                <button type="button" class="btn btn-primary btn-sm" ng-click="addFoodGeneres2()"> <i class="glyphicon glyphicon-plus"></i></button>
                                             </form>
-                                            <hr>
                                         </div>
                                         <div>
-                                            <ul class="list-group">Food genre:
+                                            <ul class="list-group">
                                                 <div class="container">
                                                 <li class="list-group-item list-group-item-success" ng-repeat="food in myPerfil.foodTastes" >
                                                     {{food.name}}
@@ -192,39 +193,43 @@
                                             </ul>
                                         </div>
                                         <!-- add food tastes -->
+                                        <!--
                                         <div>
                                             <label>Add Food Generes: <input type="text" ng-model="foodImput" ng-bind="genreFood"></label> <span ></span>
-                                            <button type="button" class="btn btn-primary btn-sm" ng-click="addFoodGeneres()"> Add</button>
+                                            <button type="button" class="btn btn-primary btn-sm" ng-click="addFoodGeneres()"> <i class="glyphicon glyphicon-plus"></i></button>
                                         </div>
+                                        -->
                                      </div>  
-                                    <!-- MOVIES GENRE -->
+                                <hr>    
+                                <!-- MOVIES GENRE -->
                                 <div>                                     
-                                        <div ng-controller="optionMoviesGenre">
-                                            <form name="movieForm">
+                                        <div ng-controller="optionMovieGenre">
+                                            <!--<form name="myForm"> -->
                                                 <label for="repeatSelect">Add favorite genre: </label>
                                                 <br>
                                                 <select name="repeatSelect" id="repeatSelect" ng-model="newMovieGenre">
                                                     <option ng-repeat="option in availableMovieOptions" value="{{option.name}}">{{option.name}}</option>
                                                 </select>
-                                                <button type="button" class="btn btn-primary btn-sm" ng-click="addMovieGeneres2()"> Add</button>
-                                            </form>
-                                            <hr>
-                                        </div>
+                                                <button type="button" class="btn btn-primary btn-sm" ng-click="addMovieGeneres2()"> <i class="glyphicon glyphicon-plus"></i></button>
+                                             <!--</form>-->                                        
                                         <div>
-                                            <ul class="list-group">Movie genre:
+                                            <ul class="list-group">
                                                 <div class="container">
-                                                <li class="list-group-item list-group-item-success" ng-repeat="movie in myPerfil.movieGenre" >
+                                                <li class="list-group-item list-group-item-success" ng-repeat="movie in myPerfil.moviegeneres" >
                                                     {{movie.name}}
                                                 </li>
-                                                </div>    
+                                                </div>
                                             </ul>
                                         </div>
-                                        <!-- add movie genre -->
+                                        <!-- add movie generes -->
+                                        <!--    
                                         <div>
                                             <label>Add Movie Generes: <input type="text" ng-model="movieImput" ng-bind="genreMovie"></label> <span ></span>
-                                            <button type="button" class="btn btn-primary btn-sm" ng-click="addMovieGeneres()"> Add</button>
+                                            <button type="button" class="btn btn-primary btn-sm" ng-click="addMovieGeneres()"> <i class="glyphicon glyphicon-plus"></i></button>
                                         </div>
-                                     </div> 
+                                        -->
+                                     </div>
+                                </div> 
                                 
                                 
                                 <!--    
@@ -235,13 +240,35 @@
                                         </li>
                                     </ul>
                                 -->
+                                <hr>
                                     <!-- OTHER TASTES -->
-                                    <ul class="list-group">Other genre:
-                                        <li class="list-group-item list-group-item-success">Other 1
-                                        </li>
-                                        <li class="list-group-item list-group-item-success">Other 2
-                                        </li>
-                                    </ul>
+                                    
+                                      <div>                                     
+                                        <div ng-controller="optionOther">
+                                            <!--<form name="myForm"> -->
+                                                <label for="repeatSelect">Add favorite genre: </label>
+                                                <br>
+                                                <select name="repeatSelect" id="repeatSelect" ng-model="newOtherGenre">
+                                                    <option ng-repeat="option in availableOtherOptions" value="{{option.name}}">{{option.name}}</option>
+                                                </select>
+                                                <button type="button" class="btn btn-primary btn-sm" ng-click="addOtherGeneres()"> <i class="glyphicon glyphicon-plus"></i></button>
+                                             <!--</form>-->                                        
+                                        <div>
+                                            <ul class="list-group">
+                                                <div class="container">
+                                                <li class="list-group-item list-group-item-success" ng-repeat="other in myPerfil.otherLikes" >
+                                                    {{other.name}}
+                                                </li>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                        <!-- add movie generes -->
+                                        <div>
+                                            <label>Add Other Generes: <input type="text" ng-model="newOtherGenre" ng-bind="genreMovie"></label> <span ></span>
+                                            <button type="button" class="btn btn-primary btn-sm" ng-click="addOtherGeneres()"> <i class="glyphicon glyphicon-plus"></i></button>
+                                        </div>
+                                     </div>
+                                </div>      
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="event">
@@ -271,6 +298,7 @@
                                     <div>
                                         <!-- agregar amigos a evento -->
                                         <h2>Add your friends</h2>
+                                        <div class="container">
                                         <ul>
                                             <div class="checkbox">
                                                 <label><input type="checkbox" value="">Amigo1 </label>
@@ -282,6 +310,7 @@
                                                 <label><input type="checkbox" value="">Amigo3</label>
                                             </div>
                                         </ul>
+                                        </div>    
                                     </div>
                                 </div>
                             </div>
