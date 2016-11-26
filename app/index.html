@@ -1,238 +1,393 @@
 <html !doctype html>
-    <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/font-awesome.css">
-          <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-                 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- endbuild -->
-    </head>
-<body ng-app="desaappGroupfFrontendApp">
-  <div STYLE="width: 100%; background-color: #D8D8D8"
-		class="wide nav header"><h3 align="middle"> Where we go ?</h3></div>
-  <div class="row">
-      <div class="col-xs-3" >
-      <div>
-        <ul>
-            <img src="http://hombre.starmedia.com/imagenes/2012/12/facebook350.jpg" style="text-align: top;width:100px;height:100px;">
-        </ul>
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<!-- build:css(.) styles/vendor.css -->
+<!-- bower:css -->
+<link rel="stylesheet"
+	href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- endbower -->
+<!-- endbuild -->
+<!-- build:css(.tmp) styles/main.css -->
+<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/font-awesome.css">
+
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id"
+	content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+<link
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- endbuild -->
+
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id"
+	content="53269683987-36sdqetsonb9f5u0agl4rvbf1j5f8mep.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+   <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+
+
+</head>
+<body ng-app="desaappGroupfFrontendApp"   >
+
+	<!-- build:js(.) scripts/vendor.js style = "background-repeat:no-repeat" background="images/fondo.jpg" -->
+	<!-- bower:js -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.js"></script>
+	<!-- endbower -->
+	<!-- endbuild -->
+	<!-- build:js({.tmp,app}) scripts/scripts.js -->
+	<script  src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.13.0/angular-translate.js"></script>
+	<link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+	<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.js"></script>
+	<script src="scripts/app.js"></script>
+	<script src="scripts/controllers/main.js"></script>
+	<script src="scripts/controllers/login.js"></script>
+	<script src="scripts/controllers/i18n.js"></script>
+	<script src="scripts/controllers/events.js"></script>
+	
+	<!-- endbuild -->
+
+	<script type="text/javascript">
+		var dom_el;
+		var ng_el;
+		var ng_el_scope;
+		var user;
+
+		(function() {
+			document.getElementById("mainDiv").style.display = 'none';
+			console.log("ASDFASDFASDFASDFASDF");
+		});
+
+		function onSignIn(googleUser) {
+
+			dom_el = document.querySelector('[ng-controller="loginCtrl"]');
+			ng_el = angular.element(dom_el);
+			ng_el_scope = ng_el.scope();
+			ng_el_scope.mainDiv = {};
+			ng_el_scope.mainDiv.show = false;
+			// Useful data for your client-side scripts:
+			ng_el_scope.user = googleUser.getBasicProfile();
+			//console.log("ID: " + ng_el_scope.user.getId()); // Don't send this directly to your server!
+			//console.log('Full Name: ' + ng_el_scope.user.getName());
+			//console.log('Given Name: ' + ng_el_scope.user.getGivenName());
+			//console.log('Family Name: ' + ng_el_scope.user.getFamilyName());
+			//console.log("Image URL: " + ng_el_scope.user.getImageUrl());
+			//console.log("Email: " + ng_el_scope.user.getEmail());
+			ng_el_scope.img = {};
+			ng_el_scope.img.url = ng_el_scope.user.getImageUrl();
+			// The ID token you need to pass to your backend:
+			var id_token = googleUser.getAuthResponse().id_token;
+			ng_el.scope().iniciar();
+			document.getElementById("mainDiv").style.display = 'block';
+			//$scope.img = new Image();
+			//$scope.img = ng_el_scope.user.getImageUrl());
+			//console.log("ID Token: " + id_token);
+		};
+	</script>
+
+<div ng-controller="loginCtrl" >
+	<div STYLE="width: 100%; background-color: #D8D8D8"
+		class="wide nav header" ng-controller="changeLanguageCtrl">
+		<div class="col-xs-8">
+			<h3 align="middle">{{'HEADLINE' | translate }}</h3>        
+        </div>
+        <div class="col-xs-2" >
+        <select ng-model="languge" ng-change="changeLanguage(languge)">
+         <option value="es">
+             {{'OPTIONLENGUAGE1' | translate }}
+         </option>
+            
+        <option value="en">
+             {{'OPTIONLENGUAGE2' | translate }}
+         </option>
+            
+        </select>
+          
+        </div>
+		<div class="col-xs-2 btn-group" class="container">
+			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark">
+			</div>
+			<div>
+				<div type="button" class="btn btn-default btn-lg"
+					ng-click="signOut()">
+					<span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+					{{'SINGOUT' | translate }}
+				</div>
+				<div>
+					<label>{{existeUserRes.mail}}</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" id="mainDiv" ng-controller="loginCtrl" style = "display:none" >
+		<div class="col-xs-3">
+			<div>
+				<ul>
+					<img ng-src="{{img.url}}"
+						style="text-align: top; width: 100px; height: 100px;">
+				</ul>
+			</div>
+			<div>
+			<ul>
+			<li><label>	<h4>{{existeUserRes.name}} </h4></label></li>
+			<li><label>	<h4>{{existeUserRes.surname}}</h4></label></li>
+		</ul>
+		</div>
+		</div>
+		<div class="col-xs-9">
+			<div>
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" class="active">
+					<li role="presentation"><a href="#events"
+						aria-controls="settings" role="tab" data-toggle="tab">{{'Event' | translate }}</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab">{{'Profile' | translate }}</a></li>
+					<li role="presentation" role="tablist"><a href="#friends"
+						aria-controls="home" role="tab" data-toggle="tab">{{'Friends' | translate }}</a></li>
+				</ul>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<!-- FRIEND TABS -->
+					<div role="tabpanel" class="tab-pane active" id="friends">
+						<div>
+							<!-- ng-controller="myCtrl"> -->
+							<!-- Friends toolbar -->
+							<ul class="nav nav-tabs" id="tab-friends">
+								<li class="active"><a data-toggle="tab" href="#home">{{'MyFriends' | translate }}</a></li>
+								<li><a data-toggle="tab" href="#menu1">{{'FriendsAdministration' | translate }}</a></li>
+							</ul>
+							<!-- content tab friends -->
+							<div class="tab-content">
+								<!-- content tab friends view-->
+								<div id="home" class="tab-pane fade in active">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Profile image</th>
+												<th>First Name</th>
+												<th>Last Name</th>
+												<th>Username</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row" width:110px><img
+													src="http://hombre.starmedia.com/imagenes/2012/12/facebook350.jpg"
+													style="text-align: top; width: 100px; height: 100px;"></th>
+												<td>Mark</td>
+												<td>Otto</td>
+												<td>@mdo</td>
+											</tr>
+											<tr>
+												<th scope="row" width:110px><img
+													src="http://hombre.starmedia.com/imagenes/2012/12/facebook350.jpg"
+													style="text-align: top; width: 100px; height: 100px;"></th>
+												<td>Jacob</td>
+												<td>Thornton</td>
+												<td>@fat</td>
+											</tr>
+											<tr>
+												<th scope="row" width="10%"><img
+													src="http://hombre.starmedia.com/imagenes/2012/12/facebook350.jpg"
+													style="text-align: top; width: 100px; height: 100px;"></th>
+												<td>Larry</td>
+												<td>the Bird</td>
+												<td>@twitter</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- content tab friends Administration-->
+								<div id="menu1" class="tab-pane fade">
+									<h3>Menu 1</h3>
+									<h2>
+										{{rows.length}} Friend{{plural(rows)}} <span ng-show="temp">?<small
+											class="muted"><em> (only {{rows.length-1}}
+													actually....)</em></small></span>
+									</h2>
+									<form class="form-horizontal">
+										<span ng-class="{'input-append':addName}"> <input
+											id="add" type="text" placeholder="Another one ?"
+											ng-model="addName" ng-change="addTemp()" /> <input
+											type="submit" class="btn btn-primary" ng-click="addRow()"
+											ng-show="addName" value="+ add" />
+										</span> <span class="search input-prepend"
+											ng-class="{'input-append':search}"> <span
+											class="add-on"><i class="icon-search"></i></span> <input
+											type="text" class="span2" placeholder="Search"
+											ng-model="search">
+											<button type="submit" class="btn btn-inverse"
+												ng-click="search=''" ng-show="search" value="+ add">
+												<i class="icon-remove icon-white"></i>
+											</button>
+										</span>
+									</form>
+									<table class="table table-striped">
+										<tr ng-repeat="row in rows | filter : search"
+											ng-class="{'muted':isTemp($index)}">
+											<td>{{$index+1}}</td>
+											<td>{{row}}</td>
+											<td><button class="btn btn-danger btn-mini"
+													ng-click="deleteRow(row)" ng-hide="isTemp($index)">
+													<i class="icon-trash icon-white"></i>
+												</button></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- end FRIEND TABS -->
+					<!-- PROFILE TABS -->
+					<div role="tabpanel" class="tab-pane" id="profile">
+						<h1>{{'TitleProfile' | translate }}</h1>
+						<div>
+							<h3>{{'PrefereceProfile' | translate }}</h3>
+
+									<div ng-controller="amountMaxCtrl">
+									<label for="usr">{{'MaxAmount' | translate }}</label>  {{existeUserRes.profile.amountMax}}
+									<br>
+									 <input type="text"
+										ng-model="amountMaxVal">
+										<button type="button" class="btn btn-primary btn-sm"
+										ng-click="changeAmoutMax()"><i class="glyphicon glyphicon-plus"></i></button>
+	     							</div>
+
+							<div>
+								<label>Nik: {{existeUserRes.profile.nik}}</label>
+								<button>Editar</button>
+							</div>
+							<!-- MUSICAL GENRE -->
+									<hr>							
+							<div>
+
+								<div ng-controller="optionMusicalGenre">
+									<!--<form name="myForm"> -->
+									<label for="repeatSelect">{{'AddMusical' | translate }}</label> <br>
+									<select name="repeatSelect" id="repeatSelect"
+										ng-model="newMusicalGenre">
+										<option ng-repeat="option in availableOptionsMusicalGenre"
+											value="{{option}}">{{option}}</option>
+									</select>
+									<button type="button" class="btn btn-primary btn-sm"
+										ng-click="addMusicalGeneres2()"><i class="glyphicon glyphicon-plus"></i></button>
+									<!--</form>-->
+
+
+									<div>
+										<ul class="list-group">
+											<div class="container">
+												<li class="list-group-item list-group-item-success"
+													ng-repeat="music in existeUserRes.profile.musicalGeneres">
+													{{music.nameGMusical}}</li>
+											</div>
+										</ul>
+									</div>
+									<!-- add musical generes 
+									<div>
+										<label>Add Musical Generes: <input type="text"
+											ng-model="musicalImput" ng-bind="genreMusical"></label> <span></span>
+										<button type="button" class="btn btn-primary btn-sm"
+											ng-click="addMusicalGeneres()">Add</button>
+									</div>-->
+								</div>
+							</div>
+							<!-- FOOD GENRE -->
+									<hr>
+							<div>
+								<div ng-controller="optionFoodGenre">
+									<form name="foodForm">
+										<label for="repeatSelect">{{'AddFood' | translate }}</label> <br>
+										<select class="selectpicker" name="repeatSelect" id="repeatSelect"
+											ng-model="newFoodGenre">
+											<option ng-repeat="option in optionNewFoodGenre"
+												value="{{option}}">{{option}}</option>
+										</select>
+										<button type="button" class="btn btn-primary btn-sm"
+											ng-click="addFoodGeneres2()"><i class="glyphicon glyphicon-plus"></i></button>
+									</form>
+								
+								</div>
+								<div>
+									<ul class="list-group">
+										<div class="container">
+											<li class="list-group-item list-group-item-success"
+												ng-repeat="food in existeUserRes.profile.foodTastes">{{food.name}}</li>
+										</div>
+									</ul>
+								</div>
+								<!-- add food tastes 
+								<div>
+									<label>Add Food Generes: <input type="text"
+										ng-model="foodImput" ng-bind="genreFood"></label> <span></span>
+									<button type="button" class="btn btn-primary btn-sm"
+										ng-click="addFoodGeneres()">Add</button>
+								</div>-->
+							</div>
+							<!-- MOVIES GENRE -->
+									<hr>
+							<div>
+								<div ng-controller="optionMovieGenre">
+									<form name="movieForm">
+										<label for="repeatSelect">{{'AddMovie' | translate }}</label> <br>
+										<select ng-model='movieSelect.type' required ng-options="option.name as option.name for option in typeOptions">
+											<option ng-repeat="option in typeOptions | unique: 'movieSelect.type'"
+												value="{{option}}">{{option}}</option>
+										</select>
+										<button type="button" class="btn btn-primary btn-sm"
+											ng-click="addMovieGeneres2()"><i class="glyphicon glyphicon-plus"></i></button>
+									</form>
+								</div>
+								<div>
+									<ul class="list-group">
+										<div class="container">
+											<li class="list-group-item list-group-item-success"
+												ng-repeat="movie in  existeUserRes.profile.moviegeneres">
+												{{movie.name}}</li>
+										</div>
+									</ul>
+								</div>
+                                
+                                  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
-      <div>
-        <ul>
-            <li><a href="#userName-tab" data-toggle="tab">User name</a></li>
-            <li><a href="#editProfiler-tab" data-toggle="tab">Edit Profile</a></li>
-            <li><a href="#friends-tab" data-toggle="tab">Friends</a>
-                <ul class="nav nav-tabs nav-stacked">
-                    <li>amigo1</li>
-                    <li>amigo2</li>
-                    <li>amigo3</li>
-                    <li>amigo4</li>
-                    <li>amigo5</li>
-                    <li>amigo6</li>
-                </ul>
-            </li>
-            <li><a href="#createEvet-tab" data-toggle="tab">Create Events</a></li>
-            </ul>
-            </div>
-            </div>	         
-            <div class="col-xs-9">
-                <div>
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" class="active">
-                        <li role="presentation"><a href="#events" aria-controls="settings" role="tab" data-toggle="tab">Events</a></li>
-                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                        <li role="presentation" role="tablist"><a href="#friends" aria-controls="home" role="tab" data-toggle="tab">Friends</a></li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <!-- FRIEND TABS -->
-                        <div role="tabpanel" class="tab-pane active" id="friends">
-                            <div> <!-- ng-controller="myCtrl"> -->
-                                <!-- Friends toolbar -->
-                                <ul class="nav nav-tabs" id="tab-friends">
-                                    <li class="active"><a data-toggle="tab" href="#home">My Friends</a></li>
-                                    <li><a data-toggle="tab" href="#menu1">Friends Administration</a></li>
-                                </ul>
-                                <!-- content tab friends -->
-                                <div class="tab-content">
-                                    <!-- content tab friends view-->
-                                    <div id="home" class="tab-pane fade in active">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Profile image</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Username</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row" width:110px><img src="http://hombre.starmedia.com/imagenes/2012/12/facebook350.jpg" style="text-align: top;width:100px;height:100px;"></th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" width:110px><img src="http://hombre.starmedia.com/imagenes/2012/12/facebook350.jpg" style="text-align: top;width:100px;height:100px;"></th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" width="10%"><img src="http://hombre.starmedia.com/imagenes/2012/12/facebook350.jpg" style="text-align: top;width:100px;height:100px;"></th>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- content tab friends Administration-->
-                                    <div id="menu1" class="tab-pane fade">
-                                        <h3>Menu 1</h3>
-                                        <h2>{{rows.length}} Friend{{plural(rows)}} <span ng-show="temp">?<small class="muted"><em > (only {{rows.length-1}} actually....)</em></small></span></h2>
-                                        <form class="form-horizontal">
-                                            <span ng-class="{'input-append':addName}">
-                                                <input id="add" type="text" placeholder="Another one ?" ng-model="addName" ng-change="addTemp()"/>
-                                                <input type="submit" class="btn btn-primary" ng-click="addRow()" ng-show="addName" value="+ add"/>
-                                            </span>
-                                            <span class="search input-prepend" ng-class="{'input-append':search}">
-                                                <span class="add-on"><i class="icon-search"></i></span>
-                                                <input type="text" class="span2"  placeholder="Search" ng-model="search">
-                                                <button type="submit" class="btn btn-inverse" ng-click="search=''" ng-show="search" value="+ add"><i class="icon-remove icon-white"></i></button>
-                                            </span>
-                                        </form>
-                                        <table  class="table table-striped">
-                                            <tr ng-repeat="row in rows | filter : search"  ng-class="{'muted':isTemp($index)}">
-                                                <td>{{$index+1}}</td>
-                                                <td>{{row}}</td>
-                                                <td><button class="btn btn-danger btn-mini" ng-click="deleteRow(row)" ng-hide="isTemp($index)"><i class="icon-trash icon-white"></i></button></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end FRIEND TABS -->
-                        <!-- PROFILE TABS -->
-                        <div role="tabpanel" class="tab-pane" id="profile"><h1>Your Profile</h1>
-                            <div ng-controller="ctrlProfile">
-                                <h3>According to your tastes and preferences outputs</h3>
-                                <hr>
-                                <div class="form-group">
-                                    <label for="usr">Maximum amount for economic:</label>
-                                    <label>{{myPerfil.amountMax}}</label>
-                                </div>
-                                <div>
-                                    <label>Nik: {{myPerfil.nik}}</label>
-                                    <button type="button" class="btn btn-primary btn-sm" ng-click=""><i class="glyphicon glyphicon-pencil"></i></button>
-                                </div>
-                                <hr>
-                                <!-- MUSICAL GENRE -->
-                                    <div>                                     
-                                        <div ng-controller="optionMusicalGenre">
-                                            
-                                                <label for="repeatSelect">Add favorite genre: </label>
-                                            <form name="myForm">
-                                            <select name="repeatSelect" id="repeatSelect" ng-model="newMusicalGenre">
-                                                    <option ng-repeat="option in availableOptions" value="{{option.name}}">{{option.name}}</option>
-                                                </select>
-                                                <button type="button" class="btn btn-primary btn-sm" ng-click="addMusicalGeneres2()"><i class="glyphicon glyphicon-plus"></i></button>
-                                            </form>                                           
-                                        <div>
-                                            <ul class="list-group">
-                                                <div class="container">
-                                                <li class="list-group-item list-group-item-success" ng-repeat="music in myPerfil.musicalGeneres" >
-                                                    {{music.name}}
-                                                </li>
-                                                </div>
-                                            </ul>
-                                        </div>
-                                        <!-- add musical generes -->
-                                        <!--    
-                                        <div>
-                                            <label>Add Musical Generes: <input type="text" ng-model="musicalImput" ng-bind="genreMusical"></label> <span ></span>
-                                            <button type="button" class="btn btn-primary btn-sm" ng-click="addMusicalGeneres()"> <i class="glyphicon glyphicon-plus"></i></button>
-                                        </div>
-                                         -->
-                                     </div>
-                                    </div>
-                                <hr>
-                                    <!-- FOOD GENRE -->
-                                    <div>                                     
-                                        <div ng-controller="optionFoodGenre">
-                                            <form name="foodForm">
-                                                <label for="repeatSelect">Add favorite genre: </label>
-                                                <br>
-                                                <select name="repeatSelect" id="repeatSelect" ng-model="newFoodGenre">
-                                                    <option ng-repeat="option in availableFoodOptions" value="{{option.name}}">{{option.name}}</option>
-                                                </select>
-                                                <button type="button" class="btn btn-primary btn-sm" ng-click="addFoodGeneres2()"> <i class="glyphicon glyphicon-plus"></i></button>
-                                            </form>
-                                        </div>
-                                        <div>
-                                            <ul class="list-group">
-                                                <div class="container">
-                                                <li class="list-group-item list-group-item-success" ng-repeat="food in myPerfil.foodTastes" >
-                                                    {{food.name}}
-                                                </li>
-                                                </div>    
-                                            </ul>
-                                        </div>
-                                        <!-- add food tastes -->
-                                        <!--
-                                        <div>
-                                            <label>Add Food Generes: <input type="text" ng-model="foodImput" ng-bind="genreFood"></label> <span ></span>
-                                            <button type="button" class="btn btn-primary btn-sm" ng-click="addFoodGeneres()"> <i class="glyphicon glyphicon-plus"></i></button>
-                                        </div>
-                                        -->
-                                     </div>  
-                                <hr>    
-                                <!-- MOVIES GENRE -->
-                                <div>                                     
-                                        <div ng-controller="optionMovieGenre">
-                                            <!--<form name="myForm"> -->
-                                                <label for="repeatSelect">Add favorite genre: </label>
-                                                <br>
-                                                <select name="repeatSelect" id="repeatSelect" ng-model="newMovieGenre">
-                                                    <option ng-repeat="option in availableMovieOptions" value="{{option.name}}">{{option.name}}</option>
-                                                </select>
-                                                <button type="button" class="btn btn-primary btn-sm" ng-click="addMovieGeneres2()"> <i class="glyphicon glyphicon-plus"></i></button>
-                                             <!--</form>-->                                        
-                                        <div>
-                                            <ul class="list-group">
-                                                <div class="container">
-                                                <li class="list-group-item list-group-item-success" ng-repeat="movie in myPerfil.moviegeneres" >
-                                                    {{movie.name}}
-                                                </li>
-                                                </div>
-                                            </ul>
-                                        </div>
-                                        <!-- add movie generes -->
-                                        <!--    
-                                        <div>
-                                            <label>Add Movie Generes: <input type="text" ng-model="movieImput" ng-bind="genreMovie"></label> <span ></span>
-                                            <button type="button" class="btn btn-primary btn-sm" ng-click="addMovieGeneres()"> <i class="glyphicon glyphicon-plus"></i></button>
-                                        </div>
-                                        -->
-                                     </div>
-                                </div> 
-                                
-                                
-                                <!--    
+      
+    </div>
+  </div>
+								<!-- add movie genre 
+								<div>
+									<label>Add Movie Generes: <input type="text"
+										ng-model="movieImput" ng-bind="genreMovie"></label> <span></span>
+									<button type="button" class="btn btn-primary btn-sm"
+										ng-click="addMovieGeneres()">Add</button>
+								</div>-->
+							</div>
+
+
+							<!--    
                                 <ul class="list-group">Movie genre:
                                         <li class="list-group-item list-group-item-success">Terror
                                         </li>
@@ -240,52 +395,67 @@
                                         </li>
                                     </ul>
                                 -->
-                                <hr>
-                                    <!-- OTHER TASTES -->
-                                    
-                                      <div>                                     
-                                        <div ng-controller="optionOther">
-                                            <!--<form name="myForm"> -->
-                                                <label for="repeatSelect">Add favorite genre: </label>
-                                                <br>
-                                                <select name="repeatSelect" id="repeatSelect" ng-model="newOtherGenre">
-                                                    <option ng-repeat="option in availableOtherOptions" value="{{option.name}}">{{option.name}}</option>
-                                                </select>
-                                                <button type="button" class="btn btn-primary btn-sm" ng-click="addOtherGeneres()"> <i class="glyphicon glyphicon-plus"></i></button>
-                                             <!--</form>-->                                        
-                                        <div>
-                                            <ul class="list-group">
-                                                <div class="container">
-                                                <li class="list-group-item list-group-item-success" ng-repeat="other in myPerfil.otherLikes" >
-                                                    {{other.name}}
-                                                </li>
-                                                </div>
-                                            </ul>
-                                        </div>
-                                        <!-- add movie generes -->
-                                        <div>
-                                            <label>Add Other Generes: <input type="text" ng-model="newOtherGenre" ng-bind="genreMovie"></label> <span ></span>
-                                            <button type="button" class="btn btn-primary btn-sm" ng-click="addOtherGeneres()"> <i class="glyphicon glyphicon-plus"></i></button>
-                                        </div>
-                                     </div>
-                                </div>      
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="event">
-                            <form class="navbar-form navbar-left" role="search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                                <button type="submit" class="btn btn-default">Submit</button>
-                            </form>
-                        </div>
-                        <!-- END PROFILE TABS -->
-                        <!-- EVENT TAB -->
+							<!-- OTHER TASTES -->
+						<hr>							
+							<div ng-controller="optionOtherTastes">
+								<div>
+									<ul class="list-group">
+										<div class="container">
+											<li class="list-group-item list-group-item-success"
+												ng-repeat="other in  existeUserRes.profile.otherLikes">
+												{{other.name}}</li>
+										</div>
+									</ul>
+								</div>
+								<!-- add Ohter Likes -->
+								<div>
+									<label>{{'AddOther' | translate }}<input type="text"
+										ng-model="ohterLikeinput"></label> <span></span>
+									<button type="button" class="btn btn-primary btn-sm"
+										ng-click="addOtherLikes()"><i class="glyphicon glyphicon-plus"></i></button>
+								</div>
+							</div>
+
+
+
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="event">
+						<form class="navbar-form navbar-left" role="search">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Search">
+							</div>
+							<button type="submit" class="btn btn-default">Submit</button>
+						</form>
+					</div>
+					<!-- END PROFILE TABS -->
+					<!-- EVENT TAB -->
                         <div role="tabpanel" class="tab-pane" id="events">
                             <div class="row">
                                 <div class="col-sm-6">
+
+                                	<div ng-controller = "eventsTableController">
+                                	
+                                	<table ng-table="vm.tableParams" class="table" show-filter="true">
+									 <thead></thead>
+  									 <tbody>
+									<tr ng-repeat="event in allevents">
+        							<td title="'IdEvent'"  >
+            												{{event.idEvent}}</td>
+								    <td title="'Description'">
+								            {{event.description}}</td>
+								    </tr>								  
+									</tbody>
+								
+									</table>
+								
+								<div data-pagination="allevents" data-num-pages="numPages()" 
+									  data-current-page="currentPage" data-max-size="maxSize"  
+									  data-boundary-links="true"></div>
+									
+                                	</div>
 <!-- view event -->
-                                    <hr>
+                                    <!--<hr>
                                     <div class="container-fluid bg-grey">
                                         <h2>Events</h2>
                                         <h4>Planned outings</h4>
@@ -338,11 +508,11 @@
                                             <button type="button" class="list-group-item" id="surprice">Surprice</button>
                                             <button type="button" class="list-group-item" id="saturnight">SaturNight</button>
                                         </ul>
-                                    </div>
-                                    
+                                    </div
+
+
                                     <div>
-                                        <!-- agregar amigos a evento -->
-                                        <h2>Add your friends</h2>
+                                         <h2>Add your friends</h2>
                                         <div class="container">
                                         <ul>
                                             <div class="checkbox">
@@ -357,35 +527,29 @@
                                         </ul>
                                         </div>    
                                     </div>
-                                    </div>    
-                                </div>
+                                    </div>    -->
+
+                                		</div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-<!-- EVENT TAB -->
-<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-        <script>
-            !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-            (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-            r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-            }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-            ga('create', 'UA-XXXXX-X');
-            ga('send', 'pageview');
-        </script>
-        <!-- build:js(.) scripts/vendor.js -->
-        <!-- bower:js -->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="bower_components/angular-resource/angular-resource.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <!-- endbuild -->
-    </body>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- EVENT TAB -->
+	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+	<script>
+		!function(A, n, g, u, l, a, r) {
+			A.GoogleAnalyticsObject = l, A[l] = A[l] || function() {
+				(A[l].q = A[l].q || []).push(arguments)
+			}, A[l].l = +new Date, a = n.createElement(g), r = n
+					.getElementsByTagName(g)[0], a.src = u, r.parentNode
+					.insertBefore(a, r)
+		}(window, document, 'script',
+				'https://www.google-analytics.com/analytics.js', 'ga');
+		ga('create', 'UA-XXXXX-X');
+		ga('send', 'pageview');
+	</script>
+</body>
 </html>
