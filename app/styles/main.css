@@ -103,3 +103,49 @@ body {
 .select{
     background-color:#F5D0A9;
 }
+
+
+.modal-body {
+    max-height: 80vh;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #F5D0A9;
+}
+
+
+.imgRedonda {
+    width:65px;
+    height:65px;
+    border-radius:40px;
+    border:0px solid #666;
+}
+
+.list-group-item
+{
+  overflow:hidden;  
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.list-group-item {
+    padding: 3px 10px
+}
+
+body .view-event {
+    /* new custom width */
+    width: 750px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    margin-left: -375px;
+}
+
+body .error-null {
+    /* new custom width */
+    width: 300px;
+    height:220px;
+    margin-left: -375px;
+}

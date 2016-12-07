@@ -2,9 +2,9 @@
 
 //var urlBase = "http://desapp-groupf.herokuapp.com/rest/";
 
-var urlBase = "https://desapp-groupf.herokuapp.com/rest/";
+var urlBase = "http://localhost:8080/rest/";
 	console.log(urlBase);
-var app = angular.module('desaappGroupfFrontendApp', ['pascalprecht.translate', 'ngTable','ui.bootstrap']);
+var app = angular.module('desaappGroupfFrontendApp', ['pascalprecht.translate', 'ngTable','ui.bootstrap','ui.bootstrap.modal']);
 
 app.config([ '$httpProvider', function($httpProvider) {
 	$httpProvider.defaults.useXDomain = true;
@@ -53,10 +53,25 @@ app.config([ '$httpProvider', function($httpProvider) {
        return this.user.profile;
     }
     
-   // this.getProfile=function(){
-    //   return this.user.profile;
-   // }
+    this.getProfile=function(){
+       return this.user.profile;
+   }
 
+    this.getListBy = function(filtro){
+    	if(filtro=="sugerenciasMovies"){
+    		return this.user.profile.moviegeneres.map(function(elem){return elem.name});
+    	}
+    	if(filtro =="sugerenciasFood"){
+    		return this.user.profile.foodTastes.map(function(elem){return elem.name});
+    	}
+    	if(filtro=="sugerenciasOther"){
+    		return this.user.profile.otherLikes.map(function(elem){return elem.name});
+    	}
+    	if(filtro =="sugerenciasMusical"){
+    		return this.user.profile.musicalGeneres.map(function(elem){return elem.nameGMusical});
+    	}
+    
+    }
 
 });
 
@@ -178,13 +193,13 @@ app.controller('optionMovieGenre', function($scope, $http , systemService) {
 	// $scope.genreMusical = "JAJAJ";
     $scope.typeOptions = [
     { name: 'TERROR', value: 'TERROR' }, 
-    { name: 'ACTION', value: 'ACTION' },
+    { name: 'ACCION', value: 'ACCION' },
     { name: 'DRAMA', value: 'DRAMA' },
-    { name: 'COMEDY', value: 'COMEDY' }, 
+    { name: 'COMEDIA', value: 'COMEDIA' }, 
     { name: 'BELICAS', value: 'BELICAS' },
-    { name: 'SUSPENSE', value: 'SUSPENSE' },
-    { name: 'ROMANTIC', value: 'ROMANTIC' },
-    { name: 'SCIENCE FICTION', value: 'SCIENCE FICTION' }    
+    { name: 'SUSPENSO', value: 'SUSPENSO' },
+    { name: 'ROMANTICO', value: 'ROMANTICO' },
+    { name: 'CIENCIA FICCION', value: 'CIENCIA FICCION' }    
     ];
     
     $scope.movieSelect = {type : $scope.typeOptions[0].value};
@@ -258,15 +273,98 @@ app.controller('optionOtherTastes', function($scope, $http , systemService) {
 
 });
 
+var null_item_controler;
+var bind_null_item_controler;
+var null_item_controler_scope;
+
+//var null_item_controler = document.querySelector('[ng-controller="nullItemModal"]');
+//var bind_null_item_controler = angular.element(null_item_controler);
+//var null_item_controler_scope = bind_null_item_controler.scope();
 
 app.controller('amountMaxCtrl', function($scope, $http , systemService) {
+
+null_item_controler = document.querySelector('[ng-controller="nullItemModal"]');
+bind_null_item_controler = angular.element(null_item_controler);
+null_item_controler_scope = bind_null_item_controler.scope();
+
+    
+$scope.onlyNumbers = /^\d+$/;
 	// $scope.myPerfil = {};
 	// $scope.genreMusical = "JAJAJ";
 		$scope.amountMaxVal;
+     
+	   $scope.changeAmoutMax = function() {
+        if($scope.amountMaxVal == null || $scope.amountMaxVal == ""){
+            //alert("The amount entered is not valid, please enter a valid amount to continue");
+                bind_null_item_controler.scope().openNullItemModal();
+        }
+        else{ if(isNaN($scope.amountMaxVal)){
+                //alert("The amount must be a number");
+                bind_null_item_controler.scope().openNullItemModal();
+                }    
+                else{    
+                    //$scope.resultAmounMax = "Agregado exitosamente";    
+		              $scope.user = systemService.getUser();
+		              $scope.user.profile.amountMax = $scope.amountMaxVal;
+		$http(
+				{
+					method : 'POST',
+					url : urlBase + 'profile/updateprofile',
+					headers : {
+						'Content-Type' : 'application/json',
+						'accept' : 'application/json'
+					},
+					data : $scope.user.profile,
+				}).then(
+				function mySucces(response) {
+				$scope.user.profile = systemService.updateprofile(response.data);   
+				alert("The amount has been successfully changed")			
+				}, function myError(response) {
+					console.log(response);
 
-	$scope.changeAmoutMax = function() {
-		$scope.user = systemService.getUser();
-		$scope.user.profile.amountMax = $scope.amountMaxVal;
+				//	$scope.data.model = "vacio";
+
+				});
+	};
+    };
+    };
+    $scope.amountMaxVal == "";
+});
+
+app.controller("nullItemModal", function($scope) {
+
+  $scope.openNullItemModal = function() {
+    $scope.showModalNullItem = true;
+  };
+
+  $scope.ok = function() {
+    $scope.showModalNullItem = true;
+  };
+
+  $scope.cancel = function() {
+    $scope.showModalNullItem = false;
+  };
+});
+
+/*
+app.controller("seeDetail", function($scope, $http) {
+
+  $scope.openShowModalSeeDetail = function() {
+    $scope.showModalSeeDetail = true;
+  };
+
+  $scope.ok = function() {
+    $scope.showModalSeeDetail = true;
+  };
+
+  $scope.cancel = function() {
+    $scope.showModalSeeDetail = false;
+  };
+        
+});
+*/
+
+/*
 		$http(
 				{
 					method : 'POST',
@@ -283,12 +381,24 @@ app.controller('amountMaxCtrl', function($scope, $http , systemService) {
 				}, function myError(response) {
 					console.log(response);
 
-				//	$scope.data.model = "vacio";
+					$scope.data.model = "vacio";
 
 				});
-	};
+            */
 
+app.controller("nullItemModal2", function($scope) {
 
+  $scope.openNullItemModal2 = function() {
+    $scope.showModalNullItem2 = true;
+  };
 
+  $scope.ok = function() {
+    $scope.showModalNullItem2 = true;
+  };
+
+  $scope.cancel = function() {
+    $scope.showModalNullItem2 = false;
+  };
 });
+
 

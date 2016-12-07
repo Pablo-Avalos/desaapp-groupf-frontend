@@ -13,7 +13,8 @@
 <!-- endbower -->
 <!-- endbuild -->
 <!-- build:css(.tmp) styles/main.css -->
-<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/flags/flags.css">
+<link rel="stylesheet" href="styles/main.css">    
 <link rel="stylesheet" href="styles/font-awesome.css">
 
 <meta name="google-signin-scope" content="profile email">
@@ -52,7 +53,8 @@
 	<script src="scripts/controllers/login.js"></script>
 	<script src="scripts/controllers/i18n.js"></script>
 	<script src="scripts/controllers/events.js"></script>
-	
+    <script src="scripts/controllers/angular-ui-bootstrap-modal.js"></script>  
+    
 	<!-- endbuild -->
 
 	<script type="text/javascript">
@@ -96,13 +98,27 @@
 <div ng-controller="loginCtrl" >
 	<div STYLE="width: 100%; background-color: #D8D8D8"
 		class="wide nav header" ng-controller="changeLanguageCtrl">
-		<div class="col-xs-8">
-			<h3 align="middle">{{'HEADLINE' | translate }}</h3>        
+        <div class="col-xs-2">
+            <div class="container">
+			<div class="container">
+					<img ng-src="{{img.url}}"
+						class="imgRedonda">
+                    <div class="container">
+			<label>	<h7>{{existeUserRes.name}} {{existeUserRes.surname}}</h7></label>
+		</div>
+			</div>
+            </div>    
+		</div>
+		<div class="col-xs-5">
+            <div class="container">
+			<h3 align="middle">{{'HEADLINE' | translate }}</h3>
+            </div>    
         </div>
-        <div class="col-xs-2" >
+        <div class="col-xs-3" >
+        <div class="container">    
         <select ng-model="languge" ng-change="changeLanguage(languge)">
          <option value="es">
-             {{'OPTIONLENGUAGE1' | translate }}
+              {{'OPTIONLENGUAGE1' | translate }}
          </option>
             
         <option value="en">
@@ -110,9 +126,10 @@
          </option>
             
         </select>
-          
+        </div>  
         </div>
 		<div class="col-xs-2 btn-group" class="container">
+            <div class="container">
 			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark">
 			</div>
 			<div>
@@ -125,25 +142,12 @@
 					<label>{{existeUserRes.mail}}</label>
 				</div>
 			</div>
+            </div>    
 		</div>
 	</div>
 
 	<div class="row" id="mainDiv" ng-controller="loginCtrl" style = "display:none" >
-		<div class="col-xs-3">
-			<div>
-				<ul>
-					<img ng-src="{{img.url}}"
-						style="text-align: top; width: 100px; height: 100px;">
-				</ul>
-			</div>
-			<div>
-			<ul>
-			<li><label>	<h4>{{existeUserRes.name}} </h4></label></li>
-			<li><label>	<h4>{{existeUserRes.surname}}</h4></label></li>
-		</ul>
-		</div>
-		</div>
-		<div class="col-xs-9">
+		<div class="container">
 			<div>
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" class="active">
@@ -254,14 +258,13 @@
 							<h3>{{'PrefereceProfile' | translate }}</h3>
 
 									<div ng-controller="amountMaxCtrl">
-									<label for="usr">{{'MaxAmount' | translate }}</label>  {{existeUserRes.profile.amountMax}}
+									<label for="usr">{{'MaxAmount' | translate }}</label>  {{existeUserRes.profile.amountMax}}    
 									<br>
 									 <input type="text"
 										ng-model="amountMaxVal">
 										<button type="button" class="btn btn-primary btn-sm"
-										ng-click="changeAmoutMax()"><i class="glyphicon glyphicon-plus"></i></button>
+                                                ng-click="changeAmoutMax()"><i class="glyphicon glyphicon-plus"></i></button>
 	     							</div>
-
 							<div>
 								<label>Nik: {{existeUserRes.profile.nik}}</label>
 								<button>Editar</button>
@@ -355,28 +358,7 @@
 												{{movie.name}}</li>
 										</div>
 									</ul>
-								</div>
-                                
-                                  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
+								</div>        
 								<!-- add movie genre 
 								<div>
 									<label>Add Movie Generes: <input type="text"
@@ -384,8 +366,7 @@
 									<button type="button" class="btn btn-primary btn-sm"
 										ng-click="addMovieGeneres()">Add</button>
 								</div>-->
-							</div>
-
+							</div> 
 
 							<!--    
                                 <ul class="list-group">Movie genre:
@@ -429,113 +410,260 @@
 						</form>
 					</div>
 					<!-- END PROFILE TABS -->
-					<!-- EVENT TAB -->
-                        <div role="tabpanel" class="tab-pane" id="events">
-                            <div class="row">
-                                <div class="col-sm-6">
-
-                                	<div ng-controller = "eventsTableController">
+			        		<!-- EVENT TAB -->       
+            <div role="tabpanel" class="tab-pane" id="events">
+             <div class="row">
+                 <div class="col-sm-6">
+                 
+                <div class="container">     
+                 <div ng-controller = "eventsTableController">
                                 	
-                                	<table ng-table="vm.tableParams" class="table" show-filter="true">
-									 <thead></thead>
-  									 <tbody>
-									<tr ng-repeat="event in allevents">
-        							<td title="'IdEvent'"  >
-            												{{event.idEvent}}</td>
-								    <td title="'Description'">
-								            {{event.description}}</td>
-								    </tr>								  
-									</tbody>
-								
-									</table>
-								
-								<div data-pagination="allevents" data-num-pages="numPages()" 
-									  data-current-page="currentPage" data-max-size="maxSize"  
-									  data-boundary-links="true"></div>
-									
-                                	</div>
-<!-- view event -->
-                                    <!--<hr>
-                                    <div class="container-fluid bg-grey">
-                                        <h2>Events</h2>
-                                        <h4>Planned outings</h4>
-                                        <div class="row text-center">
-                                        <div class="col-sm-4">
-                                        <div class="thumbnail">
-                                            <p><strong>With Friends</strong></p>
-                                            <p>Group output</p>
-                                            <div class="row text-center">
-                                            <a href = "#" class = "btn btn-primary" role = "button"><i class="glyphicon glyphicon-eye-open"></i></a>    
-                                            <a href = "#" class = "btn btn-primary" role = "button"><i class="glyphicon glyphicon-pencil"></i></a> 
-                                            <a href = "#" class = "btn btn-primary" role = "button"><i class="glyphicon glyphicon-trash"></i></a>
-                                            </div>
-                                        </div>
-                                        </div>
-                                            
-                                        <div class="col-sm-4">
-                                        <div class="thumbnail">
-                                        <p><strong>Economic</strong></p>
-                                        <p>Economic output</p>
-                                        <div class="row text-center">
-                                            <a href = "#" class = "btn btn-primary" role = "button"><i class="glyphicon glyphicon-eye-open"></i></a>    
-                                            <a href = "#" class = "btn btn-primary" role = "button"><i class="glyphicon glyphicon-pencil"></i></a> 
-                                            <a href = "#" class = "btn btn-primary" role = "button"><i class="glyphicon glyphicon-trash"></i></a>
-                                        </div>      
-                                        </div>
-                                        </div>
-    
-                                        <div class="col-sm-4">
-                                        <div class="thumbnail">
-                                        <p><strong>Surprise</strong></p>
-                                        <p>Surprise output</p>
-                                        <div class="row text-center">
-                                            <a href = "#" class = "btn btn-primary" role = "button"><i class="glyphicon glyphicon-eye-open"></i></a>    
-                                            <a href = "#" class = "btn btn-primary" role = "button"><i class="glyphicon glyphicon-pencil"></i></a> 
-                                            <a href = "#" class = "btn btn-primary" role = "button"><i class="glyphicon glyphicon-trash"></i></a>
-                                        </div>      
-                                        </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class ="row"><hr> <h1> Create a new event </h1> 
-                                    <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Event type<span class="caret"></span></button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            <button type="button" class="list-group-item" id="economic">Economic</button>
-                                            <button type="button" class="list-group-item" id="withfriends">WithFriends</button>
-                                            <button type="button" class="list-group-item" id="twosome">Twosome</button>
-                                            <button type="button" class="list-group-item" id="surprice">Surprice</button>
-                                            <button type="button" class="list-group-item" id="saturnight">SaturNight</button>
-                                        </ul>
-                                    </div
+                 <nav class="navbar-default navbar-static-top">
+				  <div class="container" >
+					<label>
+						<p class="navbar-text">Busquedas</p>
+						  <input type="number" pattern="[0-10000000]" min="0" max="10000000" ng-model="cant" required> 
+						<button class="btn btn-default navbar-btn"  ng-click="buscarPersons()"> Buscar</button>
+					</label>
+		               <label>
+					    	<select  ng-model="filterProfile" ng-change="cambiarLista()" required>
+							  <option value="sugerenciasMusical">Events Musical</option>
+							  <option value="sugerenciasMovies">Movie Event</option>
+							  <option value="sugerenciasFood">Food Event</option>
+							  <option value="sugerenciasOther">Other Event</option>
+							</select>
+							<button ng-click="buscar()">Serach</button>
+		               </label>
 
 
-                                    <div>
-                                         <h2>Add your friends</h2>
-                                        <div class="container">
-                                        <ul>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" value="">Amigo1 </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" value="">Amigo2</label>
-                                            </div>
-                                            <div class="checkbox disabled">
-                                                <label><input type="checkbox" value="">Amigo3</label>
-                                            </div>
-                                        </ul>
-                                        </div>    
-                                    </div>
-                                    </div>    -->
+		               <button class="btn btn-default navbar-btn"  ng-click="openCreate()"> Create Event</button>
+				  </div>
 
-                                		</div>
+
+				</nav>
+               		
+
+            <table class="table table-striped table-condensed table-hover">
+                <thead>
+
+                    <tr>
+                        <th class="id" custom-sort order="'id'" sort="sort">Id&nbsp;</th>
+                        <th class="description" custom-sort order="'description'" sort="sort">Description&nbsp;</th>
+                       </tr>
+                </thead>
+                <tfoot>
+                    <td colspan="6">
+                        <div class="pagination pull-right">
+
+                        	<select  ng-model="itemsPerPage" ng-change="reload()">
+							  <option value="3">3</option>
+							  <option value="5">5</option>
+							  <option value="10">10</option>
+							  <option value="15">15</option>
+							  <option value="20">20</option>
+							</select>
+
+                            <ul>
+                                <li ng-class="{disabled: currentPage == 0}">
+                                    <a href ng-click="prevPage()">« Prev</a>
+                                </li>
+                            
+                                <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
+                                    ng-class="{active: n == currentPage}"
+                                ng-click="setPage()">
+                                    <a href ng-bind="n + 1">1</a>
+                                </li>
+                             
+                                <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
+                                    <a href ng-click="nextPage()">Next »</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tfoot>
+                <!-- 
+                <pre>pagedItems.length: {{pagedItems.length|json}}</pre>
+                <pre>currentPage: {{currentPage|json}}</pre>
+                <pre>currentPage: {{sort|json}}</pre>
+-->
+                <tbody>
+                    <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse"
+                        ng-attr-title="{{'pressToView' | translate}}" id="tr{{item.idEvent}}">
+                        <td >{{item.idEvent}}</td>
+                        <td>{{item.description}}</td>
+                        <td><buttom class="btn btn-info"  ng-click="launchEvenTwindow(item)" ><span class="glyphicon glyphicon-eye-open"></span></buttom></td>
+                        <td><buttom class="btn btn-danger"   data-ng-click="removeRow(item)"><span class="glyphicon glyphicon-trash"></span></buttom></td>
+                    </tr>
+                </tbody>
+            </table>
+
+                    </div>
+                     </div> 
                             </div>
                         </div>
 				</div>
 			</div>
 		</div>
 	</div>
+    </div>
+    
+    <!-- modal null item -->
+    <div ng-controller="nullItemModal">
+        <div modal="showModalNullItem" close="cancel()" class="error-null">
+        <div class="modal-header">
+        <h4>{{'ErroNullItemModal' | translate}}</h4>
+        </div>
+        <div class="modal-body">
+        <p>{{'ErroNullItemModalBody' | translate}}</p>
+        </div>
+        <div class="modal-footer">
+        <button class="btn btn-success" ng-click="cancel()">{{'Accept' | translate}}</button>
+        </div>
+        </div>
+    </div>
+    <!-- end modal null item -->
+    
+    <!-- see detail -->
+    <div ng-controller="seeDetail">
+        <div class="view-event" modal="showModalSeeDetail" close="cancel()">
+        <div class="modal-header">
+            <h6>{{'Title' | translate}}</h6><h7>{{seeDetail}}</h7>    
+        </div>
+        <div class="modal-body">
+            <h6>{{'Description' | translate}}</h6>
+            <p>{{seeDetailBody}}</p>
+            <hr>
+        </div>    
+        <div class="col-xs-6">   
+            <h6>{{'Price' | translate}}</h6>
+            <h7>{{'Money' | translate}}{{price}}<br></h7>
+        </div>
+        <div class="col-xs-6">    
+            <h6>{{'EventDateAndTime' | translate}}<br></h6>
+            <h7>{{'Date' | translate}} {{date}}<br></h7>
+            <h7>{{'StarTime' | translate}} {{starTime}}<br></h7>
+            <h7>{{'EndTime' | translate}} {{endTime}}</h7>
+        </div>    
+        <div class="col-xs-6">    
+            <h6>{{'PeopleAmount' | translate}}</h6>
+            <h7>{{numberPeople}}</h7>
+        </div>
+        <div class="col-xs-6">
+            <h6>{{'Place' | translate}}</h6>
+            <h7>{{placeName}}<br></h7>
+            <h7>{{placeAddress}}</h7>
+        </div>
+        <hr>     
+        <div class="col-xs-12">
+            <h6>{{'Participants' | translate}}</h6>
+            <ul class="list-group" ng-repeat="friend in friends | orderBy:sort.sortingOrder:sort.reverse"
+                        ng-attr-title="{{'pressToView' | translate}}" id="tr{{amigo.idEvent}}">
+                <li class="list-group-item">{{friend.nik}} {{friend.surname}}</li>
+            </ul>
+        </div>    
+        <div class="container">
+        <div class="col-xs-2">
+            <h6>{{'Alone' | translate}}</h6> {{isAlone}}
+        </div>    
+        <div class="col-xs-3">
+            <h6>{{'InTwosome' | translate}}</h6> {{isInTwosome}}
+        </div>
+        <div class="col-xs-2">
+            <h6>{{'InGruop' | translate}}</h6> {{isInGruop}}
+        </div>
+        <div class="col-xs-2">
+            <h6>{{'WithFriend' | translate}}</h6> {{isWithFriend}}
+        </div>     
+        <div class="col-xs-3">
+            <h6>Satur Night {{isSaturNight}}</h6>
+        </div>
+        </div>    
+    <!-- -->
+        <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">{{'Close' | translate}}</button>
+        <button class="btn btn-success" ng-click="attend(idProfile,events)">{{'Attend' | translate}}</button>    
+        </div>
+        </div>
+    </div>
+    <!-- end see detail -->
+
+    <!-- DIV CREATE EVENT -->
+	 <div ng-controller="createEvent">
+        <div modal="showopenCreateEvent" close="cancel()">
+        <div class="modal-header">
+        <h4></h4>
+        </div>
+        <div class="modal-body">
+           <span><h4>Create Event: <br>
+                 				Select type Event
+                 			</h4></span>
+						<div class ="col-sm-3">
+                        	<select  class="selectV" ng-model="typeEvent" ng-change="changeOptions()" required>
+							  <option value="addfoodevent">Food Event</option>
+							  <option value="addmovieevent">Movie Event</option>
+							  <option value="addmusicalevent">Musical Event</option>
+							  <option value="addotherevent">Other Event</option>
+							</select>
+						<br>
+						<div id="otherCrete" style = "display:none">
+							<label>Other Like:   <input ng-model="like" required></input></label>
+						</div>		
+						<div id ="selectCreate">
+						<span>Select Like:</span>
+						<select class="select" ng-options="like as like for like in likeOptions" ng-model="like" required></select>
+						</div>
+						<div> 
+						<label><span>Select place:</span></label>
+						<select class="selectV" ng-options="place as place.name for place in places" ng-model="place" required>
+							  <!--option ng-repeat="place in places | unique: 'place.address'" value="{{place}}">{{place.name}</option-->
+						</select>
+
+						<!--select ng-model='movieSelect.type' required ng-options="option.name as option.name for option in typeOptions">
+										</select-->				
+						</div>
+						<label># Persons:   <input type="number" pattern="[0-9]" min="0" step="1" ng-model="newEvent.cantPerson" required></input></label>
+						<label>Title :      <input ng-model="newEvent.title" required></input></label>
+						<label>Description: <input ng-model="newEvent.description" required></input></label>
+						<label>Date:        <input type="date" ng-model="dateTemp" required></input></label>
+						<label>Start Time:  <input type="time" ng-model="newEvent.starTime" required></input></label>
+						<label>End Time:    <input type="time" ng-model="newEvent.endTime" required></input></label>
+						<label>Price: <input type="number" pattern="[0-9]" min="0" step="1" ng-model="newEvent.price" required></input></label>
+							<br>
+						    <div class="checkbox">
+						      <label><input type="checkbox" value="true" ng-model="newEvent.alone">Alone </label>
+						    </div>
+						    <div class="checkbox">
+						      <label><input type="checkbox" value="true" ng-model="newEvent.inGruop">In Group</label>
+						    </div>
+						    <div class="checkbox disabled">
+						      <label><input type="checkbox" value="true" ng-model="newEvent.inTwosome">Twosome </label>
+						    </div>
+
+						</div>
+
+					
+        </div>
+        <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">{{'Close' | translate}}</button>
+        <button class="btn btn-success" ng-click="create()">{{'Create' | translate}}</button>    
+        </div>
+        </div>
+
+    </div>
+    <div ng-controller="feedbackControl">
+    <div modal="feedback" id="feedBack" >
+    	<img src="images/feed.gif"></img>
+    	{{message}} ...
+    	</div>
+   	</div>
+
+	<!-- END CREATE EVENT-->
+
+    </div>
+    
+    
+    
+	
 	
 	<!-- EVENT TAB -->
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

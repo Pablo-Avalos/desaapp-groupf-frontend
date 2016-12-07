@@ -9,8 +9,8 @@ app.config([ '$httpProvider', function($httpProvider) {
 	$httpProvider.defaults.headers.patch = {};
 } ]);
 
-var urlBase = "http://desapp-groupf.herokuapp.com/rest/";
- //var urlBase = "http://localhost:8080/rest/";
+//var urlBase = "http://desapp-groupf.herokuapp.com/rest/";
+ var urlBase = "http://localhost:8080/rest/";
 
 
 app.controller('loginCtrl', function($scope, $http, systemService) {
