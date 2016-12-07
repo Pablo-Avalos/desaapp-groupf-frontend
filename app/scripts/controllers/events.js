@@ -1,5 +1,5 @@
-//var urlBase = "http://desapp-groupf.herokuapp.com/rest/";
- var urlBase = "http://localhost:8080/rest/";
+var urlBase = "http://desapp-groupf.herokuapp.com/rest/";
+ //var urlBase = "http://localhost:8080/rest/";
 
 var events_attend_controler;
 var bind_events_attend_controler;

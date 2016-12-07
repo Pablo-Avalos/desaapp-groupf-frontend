@@ -1,8 +1,8 @@
 'use strict';
 
-//var urlBase = "http://desapp-groupf.herokuapp.com/rest/";
+var urlBase = "http://desapp-groupf.herokuapp.com/rest/";
 
-var urlBase = "http://localhost:8080/rest/";
+//var urlBase = "http://localhost:8080/rest/";
 	console.log(urlBase);
 var app = angular.module('desaappGroupfFrontendApp', ['pascalprecht.translate', 'ngTable','ui.bootstrap','ui.bootstrap.modal']);
 
